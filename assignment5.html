@@ -151,18 +151,30 @@
                     <input id="cupon" class="input input-bordered join-item" placeholder="Coupon Code"/>
                     <button onclick="discount()" id="cuponButton" class="btn btn-secondary join-item rounded-lg" disabled>Apply</button>
                 </div>
-            </div>           
-            <div class="indicator bg-white p-12 mt-10">
-                <div class="indicator-item indicator-bottom indicator-center">
-                    <button class="btn btn-secondary" disabled id="payment">Make Payment</button>
-                </div>
-                <div class="border-b-2 border-zinc-300" id="items">
+                       
+            
+                
+                <div class="border-b-2 border-zinc-300 mt-20" id="items">
                     
                 </div>
-                <div class="">
+                <div class="mt-5">
                     <h1 class="text-zinc-300"><span class="font-bold text-black">Total Price: </span><span id="tlprice">0.00</span>TK</h1>
                     <h1 class="text-zinc-300"><span class="font-bold text-black">Discount: </span><span id="disc">0.00</span>TK</h1>
                     <h1 class="text-zinc-300"><span class="font-bold text-black">Total: </span><span id="total">0.00</span>TK</h1>
+                </div>
+                <div class="text-center pt-5">
+                    <button onclick="my_modal_1.showModal()" class="btn btn-secondary w-60" disabled id="payment">Make Payment</button>
+                    <dialog id="my_modal_1" class="modal">
+                    <form method="dialog" class="modal-box">
+                        <img class="px-36" src="images/congo.png">
+                        <h3 class="font-bold text-4xl my-5">Congratulations</h3>
+                        <h1 class="text-zinc-400 text-sm">Your Purchase the product</h1>
+                        <div class="modal-action pr-44">
+                        <button class="btn btn-secondary">Go Home</button>
+                        </div>
+                    </form>
+                    </dialog>
+                </div>
             </div>
 
 
@@ -178,12 +190,7 @@
                     
                 }
             })
-            let disc=0
-            function discount(){
-               disc= 0.20;
-               
-            }
-             
+            let disc=0                      
             let i= 0
             let tlt=0
             function total(data){
@@ -192,12 +199,10 @@
                 const num =parseFloat(b)
                 i=i+num
                 document.getElementById('tlprice').innerText=i
-                if ((i>=200) && (disc===0.20)){
-                    disc=i*disc
-                    tlt=i-disc
-                    document.getElementById('disc').innerText=disc
-                    document.getElementById('total').innerText=tlt
-                    document.getElementById('payment').removeAttribute('disabled')                   
+                if ((i>=200) && (disc===0.20)){                    
+                    document.getElementById('payment').removeAttribute('disabled')
+                    discount()
+                    
 
                 }
                 else if(i>=1){
@@ -206,9 +211,21 @@
                     document.getElementById('payment').removeAttribute('disabled')
 
                 }
+            }
+            function discount(){
+                disc= 0.20
+                if (i>=200){ 
+                    let disAmount=i*disc
+                    tlt=i-disAmount
+                    document.getElementById('disc').innerText=disAmount
+                    document.getElementById('total').innerText=tlt
+                }
+                
+               
+            }
                            
 
-            }          
+                      
             
         </script>
 
